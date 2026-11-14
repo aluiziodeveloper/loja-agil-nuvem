@@ -1,0 +1,14 @@
+# Dependências e builds
+node_modules/
+.venv/
+target/
+cdk.out/
+dist/
+coverage/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+
+# Ambiente local
+.env
+.DS_Store
