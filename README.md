@@ -18,4 +18,45 @@ cd loja-agil-nuvem
 git switch --detach aula-MM-NN
 ```
 
-Como rodar, as verificações e a estrutura do projeto entram neste README a partir da aula 01-03.
+## Como rodar
+
+Você precisa de Git, Docker (com Docker Compose) e, para abrir PRs, do GitHub CLI (`gh`). Python, Node, Java, Maven, uv e AWS CLI vêm no serviço `dev`, em versões fixas:
+
+```bash
+docker compose up -d --build
+docker compose exec dev bash
+```
+
+| Ferramenta | Versão |
+|---|---|
+| Python | 3.14.10 |
+| Node.js | 24.22.3 |
+| JDK (Temurin) | 25.0.5 |
+| Maven | 3.9.16 |
+| uv | 0.13.8 |
+| AWS CLI | 2.40.3 |
+
+## Verificações
+
+As mesmas na sua máquina e na CI:
+
+```bash
+docker compose run --rm -T dev scripts/verify.sh
+```
+
+## Fluxo de trabalho
+
+GitHub Flow: cada aula nasce numa branch, vira um pull request e entra na `main` por squash merge com a CI verde. A `main` é protegida pelo ruleset de `.github/ruleset-main.json` (aplicado com `scripts/setup-github.sh`). Commits e títulos de PR seguem o Conventional Commits. Para fechar uma aula: `scripts/pr.sh aula-MM-NN`.
+
+## Estrutura
+
+```text
+.github/          CI, título do PR, Dependabot e o ruleset da main
+docker/dev/       imagem do serviço dev
+scripts/          verify.sh, pr.sh, setup-github.sh
+compose.yaml      o serviço dev, sem portas publicadas
+```
+
+## Licença
+
+[MIT](LICENSE)

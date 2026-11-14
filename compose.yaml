@@ -1,0 +1,29 @@
+# Serviço dev da Loja Ágil na Nuvem: Python 3.14, Node 24, JDK 25, Maven, uv e AWS CLI em versões fixas.
+# Uso: docker compose up -d --build  ·  docker compose exec dev bash
+# Sem portas publicadas: nada aqui escuta na rede do host.
+services:
+  dev:
+    build:
+      context: docker/dev
+      args:
+        # DEV_UID/DEV_GID: o mesmo usuário do host, para os arquivos do volume não virarem do root.
+        # (O bash não exporta a variável UID, por isso o nome próprio.)
+        UID: ${DEV_UID:-1000}
+        GID: ${DEV_GID:-1000}
+    image: loja-agil-nuvem-dev:2026.11
+    init: true
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+      # Configuração e credenciais temporárias da AWS num volume, não no ~/.aws do host:
+      # o login é feito aqui dentro com `aws login --remote` (aula 01-04).
+      - aws-config:/home/dev/.aws
+      - uv-cache:/home/dev/.cache/uv
+      - npm-cache:/home/dev/.npm
+      - m2-cache:/home/dev/.m2
+
+volumes:
+  aws-config:
+  uv-cache:
+  npm-cache:
+  m2-cache:
