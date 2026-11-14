@@ -9,7 +9,7 @@ FROM eclipse-temurin:25.0.5_8-jdk AS jdk
 FROM maven:3.9.16-eclipse-temurin-25 AS maven
 FROM ghcr.io/astral-sh/uv:0.13.8 AS uv
 
-FROM python:3.14.10-slim-trixie
+FROM python:3.15.0-slim-trixie
 
 ARG AWS_CLI_VERSION=2.40.3
 ARG TARGETARCH
