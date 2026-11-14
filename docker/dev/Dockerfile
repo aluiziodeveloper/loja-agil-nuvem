@@ -5,7 +5,7 @@
 # Versões validadas em 2026-11-14 para o curso.
 
 FROM node:24.22.3-trixie-slim AS node
-FROM eclipse-temurin:25.0.5_8-jdk AS jdk
+FROM eclipse-temurin:27_35-jdk AS jdk
 FROM maven:3.9.16-eclipse-temurin-25 AS maven
 FROM ghcr.io/astral-sh/uv:0.13.8 AS uv
 
