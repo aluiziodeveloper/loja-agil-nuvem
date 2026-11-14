@@ -4,7 +4,7 @@
 # Uma imagem com as três linguagens do curso em versões fixas: o aluno não instala toolchain.
 # Versões validadas em 2026-11-14 para o curso.
 
-FROM node:24.22.3-trixie-slim AS node
+FROM node:26.13.1-trixie-slim AS node
 FROM eclipse-temurin:25.0.5_8-jdk AS jdk
 FROM maven:3.9.16-eclipse-temurin-25 AS maven
 FROM ghcr.io/astral-sh/uv:0.13.8 AS uv
