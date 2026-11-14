@@ -1,15 +1,24 @@
 version: 2
 updates:
+  # Actions: correções e versões menores; a major muda junto com o curso, numa decisão própria.
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: monthly
     commit-message:
       prefix: ci
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
 
+  # Imagens do serviço dev: só correções. O curso fixa as versões das linguagens
+  # (Python 3.14, Node 24, JDK 25, Maven 3.9); trocar de versão é decisão do curso, não do robô.
   - package-ecosystem: docker
     directory: /docker/dev
     schedule:
       interval: monthly
     commit-message:
       prefix: build
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
