@@ -48,11 +48,17 @@ docker compose run --rm -T dev scripts/verify.sh
 
 GitHub Flow: cada aula nasce numa branch, vira um pull request e entra na `main` por squash merge com a CI verde. A `main` é protegida pelo ruleset de `.github/ruleset-main.json` (aplicado com `scripts/setup-github.sh`). Commits e títulos de PR seguem o Conventional Commits. Para fechar uma aula: `scripts/pr.sh aula-MM-NN`.
 
+## Como o Kiro conhece este projeto
+
+O Kiro lê as regras do projeto em `.kiro/steering/` (produto, stack, estrutura, contêiner, Python e segurança) e os procedimentos em `.kiro/skills/` (`/adr` e `/pr-description`). As decisões de arquitetura ficam em `docs/adr/` e os termos do projeto em `docs/glossary.md`. O steering orienta o agente; ele não é uma barreira de segurança.
+
 ## Estrutura
 
 ```text
 .github/          CI, título do PR, Dependabot e o ruleset da main
+.kiro/            steering e skills do Kiro
 docker/dev/       imagem do serviço dev
+docs/             visão geral, ADRs e glossário
 scripts/          verify.sh, pr.sh, setup-github.sh
 compose.yaml      o serviço dev, sem portas publicadas
 ```
